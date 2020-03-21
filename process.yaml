@@ -1,0 +1,12 @@
+name: Portfolio Static Deploy
+
+jobs:
+  build:
+    run: npx webpack build
+  test:
+    run_test: false
+  deploy:
+    use: s3
+    bucket: bucketname 
+    build_folder: dist
+
