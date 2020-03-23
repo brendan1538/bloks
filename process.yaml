@@ -2,7 +2,16 @@ name: Portfolio Static Deploy
 
 jobs:
   build:
-    run: npx webpack build
+    # sequence with names of all modules used for building
+    use: 
+      - tree-install
+    tree-install: 
+      use: npm
+      env: production
+      dirs: 
+        - /test
+        - /test/subtest
+    run: echo 'test worked'
   test:
     run_test: false
   deploy:
