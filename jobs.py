@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import import_modules.py
+from importlib import import_module
 import static_deploy
 import yaml
 
@@ -10,5 +10,14 @@ def run_job(yamlFile):
 
 # build job
 def build(yamlFile):
-    print(yamlFile['use'])
+    for moduleName in yamlFile['jobs']['build']['use']:
+        module = get_module(moduleName)
+        module.run()
+# import modules based on use key in yaml
+def get_module(moduleName):
+    module = import_module('..'+moduleName.replace('-', '_'), package='modules.subpkg') 
 
+    return module
+
+if __name__ == '__jobs__':
+    build()
