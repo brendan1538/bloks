@@ -1,12 +1,16 @@
 #!/usr/bin/python3
 
-from subprocess import Popen, STDOUT, PIPE
+from subprocess import Popen, PIPE
+import os
 
-def run(packageManager, env, dirs):
+def run(config):
+    env = config['env']
     env=('--'+env) if not env else ''
+    packageManager = config['use']
+    dirs = config['dirs']
 
     for dir in dirs:
-        install = Popen([packageManager, 'install', env], STDOUT=PIPE, STDERR=STDOUT)
+        install = Popen([packageManager, 'install', env], stdout=PIPE, stderr=PIPE, cwd='./'+dir)
         installOut,installErr = install.communicate()
 
         if installErr:

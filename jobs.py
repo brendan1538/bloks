@@ -12,7 +12,8 @@ def run_job(yamlFile):
 def build(yamlFile):
     for moduleName in yamlFile['jobs']['build']['use']:
         module = get_module(moduleName)
-        module.run()
+        module.run(yamlFile['jobs']['build'][moduleName])
+
 # import modules based on use key in yaml
 def get_module(moduleName):
     module = import_module('..'+moduleName.replace('-', '_'), package='modules.subpkg') 
