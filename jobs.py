@@ -26,10 +26,10 @@ def get_module(moduleName):
     return module
 
 def clone_repo(url):
-    Git(os.path.join(os.getcwd(), 'build/')).clone(repo)
+    Git(os.path.join(os.getcwd(), 'build/')).clone(url)
     
 
-def delete_repo():
+# def delete_repo():
 
 if __name__ == '__jobs__':
     build()
