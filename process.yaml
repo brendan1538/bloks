@@ -2,6 +2,7 @@ name: Portfolio Static Deploy
 
 jobs:
   build:
+    repo: https://github.com/user/example_repo 
     # sequence with names of all modules used for building
     use: 
       - tree-install
