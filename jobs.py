@@ -3,6 +3,7 @@
 from git import Git
 from importlib import import_module
 import static_deploy
+from subprocess import run
 import yaml
 import os
 
@@ -13,11 +14,13 @@ def run_job(yamlFile):
 # build job
 def build(yamlFile):
     buildProcess = yamlFile['jobs']['build']
-    clone_repo(buildProcess['repo'])
+    repoDir = clone_repo(buildProcess['repo'])
 
     for moduleName in buildProcess['use']:
         module = get_module(moduleName)
-        module.run(buildProcess[moduleName])
+        module.run(buildProcess[moduleName], repoDir)
+    
+    run(['rm', '-rf', repoDir])
 
 # import modules based on use key in yaml
 def get_module(moduleName):
@@ -26,7 +29,15 @@ def get_module(moduleName):
     return module
 
 def clone_repo(url):
-    Git(os.path.join(os.getcwd(), 'build/')).clone(url)
+    buildDir = os.path.join(os.getcwd(), 'build/')
+    if not os.listdir(buildDir):
+        Git(os.path.join(os.getcwd(), 'build/')).clone(url)
+    
+    repoName = os.listdir(buildDir)
+    repoDir = os.path.join(buildDir+repoName[0])
+
+    return(repoDir)
+
     
 
 # def delete_repo():
