@@ -2,21 +2,25 @@ name: Portfolio Static Deploy
 
 jobs:
   build:
-    repo: https://github.com/user/example_repo 
+    repo: https://github.com/fake/repo
     # sequence with names of all modules used for building
     use: 
       - tree-install
+      - run-commands
     tree-install: 
       use: npm
       env: production
       dirs: 
-        - /test
-        - /test/subtest
-    run: echo 'test worked'
+        - /
+    run-commands:
+      - npx webpack
+      - echo "hello world"
   test:
     run_test: false
   deploy:
     use: s3
-    bucket: bucketname 
-    build_folder: dist
+    bucket: bucketname
+    access-key: insert_access_key
+    security-key: insert_security_key
+    build_folder: build
 
