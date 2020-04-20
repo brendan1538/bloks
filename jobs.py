@@ -19,7 +19,7 @@ def build(yamlFile):
     deploy(yamlFile, repoDir)
 
     print('*** Clearing build folder ***')
-    run(['rm', '-rf', (os.path.join(os.getcwd(), 'build/'))])
+    run(['rm', '-rf', (os.path.join(os.getcwd(), 'repo_build/'))])
 
 def deploy(yamlFile, repoDir):
     deployProcess = yamlFile['jobs']['deploy']
