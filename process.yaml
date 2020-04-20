@@ -2,7 +2,7 @@ name: Portfolio Static Deploy
 
 jobs:
   build:
-    repo: https://github.com/fake/repo
+    repo: git_remote_repo_url
     # sequence with names of all modules used for building
     use: 
       - tree-install
@@ -19,8 +19,9 @@ jobs:
     run_test: false
   deploy:
     use: s3
-    bucket: bucketname
-    access-key: insert_access_key
-    security-key: insert_security_key
-    build_folder: build
+    s3:
+      bucket: s3_bucket
+      access_key: insert_access_key 
+      secret_key: insert_secret_key
+    build_output_folder: dist
 

@@ -1,22 +1,21 @@
 #!/usr/bin/python3
 
-from subprocess import Popen, PIPE
+import logging
+from subprocess import run
 import os
 
-def main_process(config, repoDir):
+def main_process(config, repoDir, *args):
     env = config['env']
     env=('--'+env) if not env else ''
     packageManager = config['use']
     dirs = config['dirs']
 
     for dir in dirs:
-        install = Popen([packageManager, 'install', env], stdout=PIPE, stderr=PIPE, cwd=repoDir+dir)
-        installOut,installErr = install.communicate()
-
-        print(installOut)
+        install = run([packageManager, 'install', env], cwd=repoDir+dir)
+        installErr = install.stderr
 
         if installErr:
-            print(installErr)
+            logging.error('error: '+installErr)
         else:
             print(f"Finished installing in {dir}") 
 
