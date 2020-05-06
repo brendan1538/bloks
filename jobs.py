@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-from git import Git
 from importlib import import_module
 from subprocess import run
 import yaml
@@ -14,8 +13,6 @@ def build(yamlFile, remoteOrigin):
     buildProcess = yamlFile['jobs']['build']
 
     run_module(buildProcess, remoteOrigin)
-
-    deploy(yamlFile, remoteOrigin)
 
     print('*** Clearing build folder ***')
     run(['rm', '-rf', (os.path.join(os.getcwd(), 'repo_build/'))])

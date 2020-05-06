@@ -1,4 +1,6 @@
-name: Portfolio Static Deploy
+# This is an example of what a bloks.yaml config in a remote repo would look like.
+
+name: Example Static Deploy
 
 jobs:
   build:

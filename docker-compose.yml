@@ -7,3 +7,5 @@ services:
       - .:/usr/src/app
     ports:
       - 8080:80
+    environment:
+      PYTHONUNBUFFERED: 1

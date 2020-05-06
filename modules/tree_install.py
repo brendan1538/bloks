@@ -11,7 +11,7 @@ def main_process(config, repoDir, *args):
     dirs = config['dirs']
 
     for dir in dirs:
-        install = run([packageManager, 'install', env], cwd=repoDir+dir)
+        install = run(f"{packageManager} install {env}", cwd=repoDir+dir, shell=True)
         installErr = install.stderr
 
         if installErr:
