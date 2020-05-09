@@ -6,7 +6,7 @@ jobs:
   build:
     repo: git_remote_repo_url
     # sequence with names of all modules used for building
-    use: 
+    use:
       - tree-install
       - run-commands
     tree-install: 
@@ -23,7 +23,5 @@ jobs:
     use: s3
     s3:
       bucket: s3_bucket
-      access_key: insert_access_key 
-      secret_key: insert_secret_key
     build_output_folder: dist
 
